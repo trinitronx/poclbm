@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+#from distutils.core import setup
+#import py2exe
 from detect import LINUX
 from distribute_setup import use_setuptools
 from setuptools import setup
@@ -22,6 +24,10 @@ args = {
     'url': 'https://github.com/m0mchil/poclbm/',
     'install_requires': ['pyserial>=2.6'],
     'scripts': ['poclbm.py'],
+    'windows': [
+        'script': 'guiminer.py',
+        'icon_resources': [(0, "logo.ico")]
+    ]
 }
 
 if LINUX:
@@ -36,10 +42,12 @@ if py2exe:
 						'compressed': True,
 						'dll_excludes': ['OpenCL.dll', 'w9xpopen.exe', 'boost_python-vc90-mt-1_39.dll'],
 						'excludes': ["Tkconstants", "Tkinter", "tcl", "curses", "_ssl", "pyexpat", "unicodedata", "bz2"],
+						'includes': ["minerutil", "twisted.web.resource", "QueueReader"],
+
 						},
 					},
-		'console': ['poclbm.py'],
-		'data_files': ['phatk.cl'],
+		'console': ['phoenix.py', 'poclbm.py', 'po_to_mo.py'],
+		'data_files': ['phatk.cl', 'msvcp90.dll', 'phatk.cl', 'logo.ico', 'LICENSE.txt', 'servers.ini', 'README.txt', 'defaults.ini'],
 		'zipfile': None,
 	})
 
